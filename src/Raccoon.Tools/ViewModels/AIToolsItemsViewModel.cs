@@ -1,6 +1,6 @@
 ﻿namespace Raccoon.Tools.ViewModels;
 
-public class AIToolsItemsViewModel : ViewModelBase
+public class AIToolsItemsViewModel 
 {
     public string Title { get; set; }
     

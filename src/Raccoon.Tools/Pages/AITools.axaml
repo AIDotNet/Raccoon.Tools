@@ -14,25 +14,24 @@
         <viewModels:AIToolsViewModel />
     </Design.DataContext>
 
-      <Grid>
+    <Grid>
         <!-- 定义两列，一列显示标题和功能列表，另一列显示翻译结果 -->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        
+
         <!-- 左边的部分 -->
         <StackPanel Grid.Column="0" Margin="10">
-            <TextBlock Text="AI工具" FontSize="24" FontWeight="Bold" Margin="0 0 0 10"/>
+            <TextBlock Text="AI工具" FontSize="24" FontWeight="Bold" Margin="0 0 0 10" />
             <u:Divider />
             <ListBox ItemsSource="{Binding AIToolsItems}"
                      Background="Transparent" Margin="0 20">
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel />
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
+                <ListBox.DataTemplates>
+                    <DataTemplate>
+                    </DataTemplate>
+                </ListBox.DataTemplates>
             </ListBox>
         </StackPanel>
-        
+
     </Grid>
 </UserControl>
