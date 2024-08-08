@@ -50,7 +50,6 @@
             <Border Grid.Column="1" Background="Gray" Width="1" />
             <Border Padding="5" Grid.Column="2">
                 <ContentControl
-                    Margin="12 36 12 12"
                     Content="{Binding Content}">
                     <ContentControl.ContentTemplate>
                         <tools:ViewLocator />

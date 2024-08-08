@@ -39,15 +39,15 @@ public partial class MainWindow : Window
                 Height = 580;
                 break;
             case <= 2560 when height <= 1440:
-                Width = 1280;
+                Width = 1180;
                 Height = 720;
                 break;
             case <= 3840 when height <= 2160:
-                Width = 1600;
+                Width = 1300;
                 Height = 900;
                 break;
             default:
-                Width = 1920;
+                Width = 1520;
                 Height = 1080;
                 break;
         }

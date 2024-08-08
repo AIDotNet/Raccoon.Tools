@@ -2,7 +2,90 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:u="https://irihi.tech/ursa"
+             xmlns:viewModels="clr-namespace:Raccoon.Tools.ViewModels"
+             xmlns:aiDto="clr-namespace:Raccoon.Tools.ViewModels.AIDto"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Raccoon.Tools.Pages.CreateLogo">
-    Welcome to Avalonia!
+             x:Class="Raccoon.Tools.Pages.CreateLogo"
+             x:DataType="viewModels:CreateLogoViewModel">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <viewModels:CreateLogoViewModel />
+    </Design.DataContext>
+
+    <Grid>
+        <!-- 定义两列，一列显示标题和功能列表，另一列显示翻译结果 -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- 左边的部分 -->
+        <StackPanel Grid.Column="0">
+            <Grid ColumnDefinitions="Auto,1,*">
+                <TextBlock Text="AI工具" FontSize="24" FontWeight="Bold" Margin="10 10 0 10" />
+                <u:Divider Grid.Column="1" Orientation="Vertical" />
+                <Grid ColumnDefinitions="*,Auto" Grid.Column="2" Margin="8">
+                    <TextBox
+                        Text="{Binding Prompt}"
+                        Height="30">
+                    </TextBox>
+                    <Button
+                        Click="GenerateLogo_OnClick"
+                        Grid.Column="1" Margin="5,0,0,0" Content="生成">
+                    </Button>
+                </Grid>
+            </Grid>
+            <u:Divider />
+            <ListBox
+                ItemsSource="{Binding  CreateLogoItems}"
+                Background="Transparent"
+                Margin="0 20">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.DataTemplates>
+                    <DataTemplate DataType="aiDto:CreateLogoItemViewModel">
+                        <WrapPanel
+                            Cursor="Hand"
+                            Background="Transparent"
+                            Width="180"
+                            Height="250"
+                            Margin="8">
+                            <WrapPanel.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Tag="{Binding Image}" Header="保存本地" Click="SaveItem_OnClick" />
+                                    <MenuItem Header="删除" Click="DeleteItem_OnClick" />
+                                </ContextMenu>
+                            </WrapPanel.ContextMenu>
+                            <StackPanel>
+                                <Image
+                                    IsVisible="{Binding  IsBusy}"
+                                    Height="190"
+                                    Width="180"
+                                    Source="{Binding Image}">
+                                </Image>
+                                <TextBlock IsVisible="{Binding !IsBusy}">
+                                    图片生成中...
+                                </TextBlock>
+                                <u:Divider>
+                                    生成提示词
+                                </u:Divider>
+                                <TextBlock
+                                    ToolTip.Tip="{Binding Prompt}"
+                                    TextTrimming="CharacterEllipsis"
+                                    TextWrapping="NoWrap"
+                                    Text="{Binding Prompt}">
+                                </TextBlock>
+                            </StackPanel>
+                        </WrapPanel>
+                    </DataTemplate>
+                </ListBox.DataTemplates>
+            </ListBox>
+        </StackPanel>
+
+    </Grid>
 </UserControl>

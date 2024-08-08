@@ -21,13 +21,34 @@
         </Grid.ColumnDefinitions>
 
         <!-- 左边的部分 -->
-        <StackPanel Grid.Column="0" Margin="10">
-            <TextBlock Text="AI工具" FontSize="24" FontWeight="Bold" Margin="0 0 0 10" />
+        <StackPanel Grid.Column="0">
+            <TextBlock Text="AI工具" FontSize="24" FontWeight="Bold" Margin="10 10 0 10" />
             <u:Divider />
-            <ListBox ItemsSource="{Binding AIToolsItems}"
-                     Background="Transparent" Margin="0 20">
+            <ListBox
+                ItemsSource="{Binding AIToolsItems}"
+                Background="Transparent"
+                Margin="0 20">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
                 <ListBox.DataTemplates>
-                    <DataTemplate>
+                    <DataTemplate DataType="viewModels:AIToolsItemsViewModel">
+                        <WrapPanel 
+                            Cursor="Hand"
+                            Background="Transparent"
+                            PointerReleased="InputElement_OnPointerReleased"
+                            Tag="{Binding ActivateCommand}"
+                            Width="120" Height="38" Margin="0,8,0,0">
+                            <PathIcon
+                                Margin="0 0 8 0"
+                                Data="{Binding Converter={StaticResource IconConverter},Path=Icon}">
+                            </PathIcon>
+                            <TextBlock FontSize="20"
+                                       Text="{Binding Title}">
+                            </TextBlock>
+                        </WrapPanel>
                     </DataTemplate>
                 </ListBox.DataTemplates>
             </ListBox>
