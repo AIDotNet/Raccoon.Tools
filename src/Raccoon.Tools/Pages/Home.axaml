@@ -1,0 +1,14 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignWidth="800"
+             d:DesignHeight="450"
+             x:Class="Raccoon.Tools.Pages.Home">
+    <StackPanel Margin="20">
+        <TextBlock Text="浣熊工具" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,20" />
+        <TextBlock Text="欢迎使用浣熊工具，浣熊工具是由AIDotNet社区提供，为您提供更好的AI工具，增加您的工作效率。" TextWrapping="Wrap" Margin="0,0,0,20" />
+        <Button Click="OpenGitHub_OnClick" Content="访问AIDotNet" HorizontalAlignment="Center" Width="200" />
+    </StackPanel>
+</UserControl>

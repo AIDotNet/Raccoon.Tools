@@ -1,0 +1,23 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Raccoon.Tools.App"
+             xmlns:local="using:Raccoon.Tools"
+             xmlns:u-semi="https://irihi.tech/ursa/themes/semi"
+             xmlns:converters="clr-namespace:Raccoon.Tools.Converters"
+             RequestedThemeVariant="Default">
+    <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.DataTemplates>
+        <local:ViewLocator />
+    </Application.DataTemplates>
+
+    <Application.Resources>
+        <converters:IconNameToPathConverter x:Key="IconConverter" />
+    </Application.Resources>
+
+    <Application.Styles>
+        <FluentTheme />
+        <StyleInclude Source="avares://Semi.Avalonia/Themes/Index.axaml" />
+        <u-semi:SemiTheme Locale="zh-CN" />
+    </Application.Styles>
+</Application>
