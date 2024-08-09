@@ -1,0 +1,26 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Raccoon.Tools.Pages.Login">
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
+        <StackPanel>
+            <TextBlock FontSize="30" FontWeight="Bold" TextAlignment="Center">
+                浣熊工具箱
+            </TextBlock>
+        </StackPanel>
+        <WrapPanel>
+            <TextBlock FontSize="20" Margin="5" Text="账号:" />
+            <TextBox Name="UserName" Margin="5" Width="250" />
+        </WrapPanel>
+
+        <WrapPanel>
+            <TextBlock FontSize="20" Margin="5" Text="密码:" />
+            <TextBox Name="Password" Margin="5" Width="250" PasswordChar="*" />
+        </WrapPanel>
+
+        <Button Width="300" Margin="5" Click="Button_OnClick" Content="登录" HorizontalAlignment="Center" />
+        <Button Width="300" Margin="5" Click="RegisterButton_OnClick" Content="注册账号" HorizontalAlignment="Center" />
+    </StackPanel>
+</UserControl>

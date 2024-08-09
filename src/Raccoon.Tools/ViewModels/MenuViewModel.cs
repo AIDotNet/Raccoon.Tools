@@ -32,9 +32,9 @@ public class MenuViewModel : ViewModelBase
             },
             new()
             {
-                MenuHeader = "系统设置",
-                Key = MenuKeys.MenuKeySettings,
-                Icon = "settings"
+                MenuHeader = "登录账号",
+                Key = MenuKeys.MenuKeyLogin,
+                Icon = "login"
             }
         };
     }
@@ -48,7 +48,7 @@ public static class MenuKeys
 
     public const string MenuKeyAIChat = "AIChat";
 
-    public const string MenuKeySettings = "Settings";
+    public const string MenuKeyLogin = "Login";
     
     public const string MenuKeyCreateLogo = "CreateLogo";
 }

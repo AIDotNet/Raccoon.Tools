@@ -1,6 +1,5 @@
 ﻿using System.Collections.Concurrent;
 using Microsoft.SemanticKernel;
-using Watermelon.Service;
 
 #pragma warning disable SKEXP0010
 
@@ -18,10 +17,10 @@ public class KernelFactory
             var client = new HttpClient(new OpenAiHandler("https://api.token-ai.cn/"));
 
             var kernel = Kernel.CreateBuilder()
-                .AddOpenAIChatCompletion("gpt-4o-mini", "", httpClient: client)
-                .AddOpenAITextToImage("", modelId: "dall-e-3",
+                .AddOpenAIChatCompletion("gpt-4o-mini", "sk-", httpClient: client)
+                .AddOpenAITextToImage("sk-", modelId: "dall-e-3",
                     httpClient: client)
-                .AddOpenAITextEmbeddingGeneration("text-embedding-ada-002", "",
+                .AddOpenAITextEmbeddingGeneration("text-embedding-ada-002", "sk-",
                     httpClient: client)
                 .Build();
 

@@ -7,6 +7,8 @@ namespace Raccoon.Tools;
 
 public class ViewLocator : IDataTemplate
 {
+    private static Dictionary<string,object> _cache = new();
+    
     public Control? Build(object? data)
     {
         if (data is null)
@@ -17,8 +19,12 @@ public class ViewLocator : IDataTemplate
 
         if (type != null)
         {
+            if(_cache.TryGetValue(name, out var value))
+                return (Control)value;
+            
             var control = (Control)Activator.CreateInstance(type)!;
             control.DataContext = data;
+            
             return control;
         }
 

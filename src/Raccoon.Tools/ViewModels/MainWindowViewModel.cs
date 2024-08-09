@@ -37,7 +37,7 @@ public partial class MainWindowViewModel : ViewModelBase
             MenuKeys.MenuKeyHome => new HomeViewModel(),
             MenuKeys.MenuKeyAI => new AIToolsViewModel(),
             MenuKeys.MenuKeyAIChat => new AIChatViewModel(),
-            MenuKeys.MenuKeySettings => new SettingsViewModel(),
+            MenuKeys.MenuKeyLogin => new LoginViewModel(),
             MenuKeys.MenuKeyCreateLogo => new CreateLogoViewModel(),
             _ => throw new ArgumentOutOfRangeException(nameof(s), s, null)
         };
