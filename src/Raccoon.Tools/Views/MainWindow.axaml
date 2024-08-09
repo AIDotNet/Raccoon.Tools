@@ -47,7 +47,7 @@
                     </u:NavMenu.IconTemplate>
                 </u:NavMenu>
             </Border>
-            <Border Grid.Column="1" Background="Gray" Width="1" />
+            <Border Grid.Column="1" Background="#28282C" Width="1" />
             <Border Padding="5" Grid.Column="2">
                 <ContentControl
                     Content="{Binding Content}">

@@ -19,6 +19,10 @@ public class MenuViewModel : ViewModelBase
             },
             new()
             {
+                IsSeparator = true
+            },
+            new()
+            {
                 MenuHeader = "AI工具",
                 Key = MenuKeys.MenuKeyAI,
                 IsSeparator = false,
@@ -49,6 +53,6 @@ public static class MenuKeys
     public const string MenuKeyAIChat = "AIChat";
 
     public const string MenuKeyLogin = "Login";
-    
+
     public const string MenuKeyCreateLogo = "CreateLogo";
 }
