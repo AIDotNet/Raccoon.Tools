@@ -24,14 +24,6 @@ public partial class App : Application
     {
         var builder = RaccoonContext.Create();
 
-        Log.Logger = new LoggerConfiguration()
-#if DEBUG
-            .MinimumLevel.Warning()
-#else
-            .MinimumLevel.Warning()
-#endif
-            .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day, retainedFileCountLimit: 7)
-            .CreateLogger();
 
         builder.AddSingleton<MainWindow>(provider => new MainWindow()
         {
