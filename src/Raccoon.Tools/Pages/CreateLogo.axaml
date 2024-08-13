@@ -25,7 +25,6 @@
         <StackPanel Grid.Column="0">
             <Grid ColumnDefinitions="Auto,1,*">
                 <TextBlock Text="AI工具" FontSize="24" FontWeight="Bold" Margin="10 10 0 10" />
-                <u:Divider Grid.Column="1" Orientation="Vertical" />
                 <Grid ColumnDefinitions="*,Auto" Grid.Column="2" Margin="8">
                     <TextBox
                         Text="{Binding Prompt}"
@@ -37,7 +36,6 @@
                     </Button>
                 </Grid>
             </Grid>
-            <u:Divider />
             <ListBox
                 ItemsSource="{Binding  CreateLogoItems}"
                 Background="Transparent"
@@ -71,9 +69,6 @@
                                 <TextBlock IsVisible="{Binding !IsBusy}">
                                     图片生成中...
                                 </TextBlock>
-                                <u:Divider>
-                                    生成提示词
-                                </u:Divider>
                                 <TextBlock
                                     ToolTip.Tip="{Binding Prompt}"
                                     TextTrimming="CharacterEllipsis"

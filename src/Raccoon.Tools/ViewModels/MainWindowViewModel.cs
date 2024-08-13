@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
+using Raccoon.Tools.Dto;
 
 namespace Raccoon.Tools.ViewModels;
 
@@ -27,10 +28,7 @@ public partial class MainWindowViewModel : ViewModelBase
         set => SetProperty(ref _content, value);
     }
 
-    public MenuViewModel Menus { get; set; } = new();
-
-
-    private void OnNavigation(MainWindowViewModel vm, string s)
+    public void OnNavigation(MainWindowViewModel vm, string s)
     {
         Content = s switch
         {
@@ -39,6 +37,7 @@ public partial class MainWindowViewModel : ViewModelBase
             MenuKeys.MenuKeyAIChat => new AIChatViewModel(),
             MenuKeys.MenuKeyLogin => new LoginViewModel(),
             MenuKeys.MenuKeyCreateLogo => new CreateLogoViewModel(),
+            MenuKeys.MenuKeySetting => new SettingViewModel(),
             _ => throw new ArgumentOutOfRangeException(nameof(s), s, null)
         };
     }

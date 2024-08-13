@@ -1,6 +1,9 @@
 using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Platform;
+using CommunityToolkit.Mvvm.Messaging;
+using FluentAvalonia.UI.Controls;
+using Raccoon.Tools.ViewModels;
 
 namespace Raccoon.Tools.Views;
 
@@ -50,6 +53,16 @@ public partial class MainWindow : Window
                 Width = 1520;
                 Height = 1080;
                 break;
+        }
+    }
+
+    private MainWindowViewModel ViewModel => (MainWindowViewModel)DataContext;
+
+    private void NvSample_OnSelectionChanged(object? sender, NavigationViewSelectionChangedEventArgs e)
+    {
+        if (e.SelectedItem is NavigationViewItem item)
+        {
+            ViewModel.OnNavigation(ViewModel, item.Tag.ToString());
         }
     }
 }

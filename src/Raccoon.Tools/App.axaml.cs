@@ -7,6 +7,7 @@ using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Raccoon.Tools.DataAccess;
+using Raccoon.Tools.Services;
 using Raccoon.Tools.ViewModels;
 using Raccoon.Tools.Views;
 using Serilog;
@@ -28,6 +29,10 @@ public partial class App : Application
         builder.AddSingleton<MainWindow>(provider => new MainWindow()
         {
             DataContext = new MainWindowViewModel()
+        });
+        builder.AddSingleton<Login>(provider => new Login()
+        {
+            DataContext = new LoginViewModel()
         });
 
         builder.Service.AddHttpClient();
@@ -51,12 +56,32 @@ public partial class App : Application
             context.Database.EnsureCreated();
         }
 
-
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             BindingPlugins.DataValidators.RemoveAt(0);
-            var main = serviceProvider.GetRequiredService<MainWindow>();
-            desktop.MainWindow = main;
+
+            var token = TokenService.GetToken();
+            if (string.IsNullOrEmpty(token))
+            {
+                var login = serviceProvider.GetRequiredService<Login>();
+                login.Show();
+                desktop.MainWindow = login;
+                login.OnSuccess = () =>
+                {
+                    desktop.MainWindow = serviceProvider.GetRequiredService<MainWindow>();
+                    desktop.MainWindow.Show();
+                    
+                    // 隐藏
+                    login.Hide();
+                    login.Close();
+                };
+                return;
+            }
+            else
+            {
+                var main = serviceProvider.GetRequiredService<MainWindow>();
+                desktop.MainWindow = main;
+            }
         }
 
         base.OnFrameworkInitializationCompleted();

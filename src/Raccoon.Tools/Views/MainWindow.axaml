@@ -11,6 +11,7 @@
         TransparencyLevelHint="AcrylicBlur"
         xmlns:u="https://irihi.tech/ursa"
         xmlns:tools="clr-namespace:Raccoon.Tools"
+        xmlns:controls="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
         Title="{Binding WindowTitle}">
 
     <Design.DataContext>
@@ -18,44 +19,25 @@
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel />
     </Design.DataContext>
-    <Border Margin="0">
-        <Grid ColumnDefinitions="Auto,1,*">
-            <Border Padding="5">
-                <u:NavMenu Name="menu"
-                           ItemsSource="{Binding Menus.MenuItems}"
-                           ExpandWidth="120"
-                           CommandBinding="{Binding ActivateCommand}"
-                           HeaderBinding="{Binding MenuHeader}"
-                           IconBinding="{Binding Icon}">
-                    <u:NavMenu.Styles>
-                        <Style Selector="u|NavMenuItem" x:DataType="vm:MenuItemViewModel">
-                            <Setter Property="IsSeparator" Value="{Binding IsSeparator}"></Setter>
-                        </Style>
-                    </u:NavMenu.Styles>
-                    <u:NavMenu.IconTemplate>
-                        <DataTemplate x:DataType="x:String">
-                            <u:TwoTonePathIcon
-                                Width="16"
-                                Height="16"
-                                ActiveForeground="{DynamicResource SemiBlue5}"
-                                ActiveStrokeBrush="{DynamicResource SemiBlue5}"
-                                Data="{Binding Converter={StaticResource IconConverter}}"
-                                Foreground="{DynamicResource SemiGrey5}"
-                                IsActive="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=u:NavMenuItem}, Path=IsHighlighted, Mode=TwoWay}"
-                                StrokeBrush="{DynamicResource SemiGrey5}" />
-                        </DataTemplate>
-                    </u:NavMenu.IconTemplate>
-                </u:NavMenu>
-            </Border>
-            <Border Grid.Column="1" Background="#28282C" Width="1" />
-            <Border Padding="5" Grid.Column="2">
+    <Grid ColumnDefinitions="*">
+        <controls:NavigationView x:Name="nvSample"
+                                 ExpandedModeThresholdWidth="120"
+                                 CompactModeThresholdWidth="120"
+                                 SelectionChanged="NvSample_OnSelectionChanged"
+                                 PaneDisplayMode="Left">
+            <controls:NavigationView.MenuItems>
+                <controls:NavigationViewItem Content="首页" Tag="Home" IconSource="Home" />
+                <controls:NavigationViewItem Content="AI工具" Tag="AI" IconSource="Library" />
+                <controls:NavigationViewItem Content="AI Chat" Tag="AIChat" IconSource="Message" />
+            </controls:NavigationView.MenuItems>
+            <controls:NavigationView.Content>
                 <ContentControl
                     Content="{Binding Content}">
                     <ContentControl.ContentTemplate>
                         <tools:ViewLocator />
                     </ContentControl.ContentTemplate>
                 </ContentControl>
-            </Border>
-        </Grid>
-    </Border>
+            </controls:NavigationView.Content>
+        </controls:NavigationView>
+    </Grid>
 </Window>

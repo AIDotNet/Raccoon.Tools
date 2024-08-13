@@ -21,9 +21,8 @@
         </Grid.ColumnDefinitions>
 
         <!-- 左边的部分 -->
-        <StackPanel Grid.Column="0">
+        <StackPanel Grid.Column="0" Margin="8">
             <TextBlock Text="AI工具" FontSize="24" FontWeight="Bold" Margin="10 10 0 10" />
-            <u:Divider />
             <ItemsControl
                 ItemsSource="{Binding AIToolsItems}"
                 Margin="0 20">
@@ -35,7 +34,7 @@
                 <ItemsControl.DataTemplates>
                     <DataTemplate DataType="viewModels:AIToolsItemsViewModel">
                         <Border
-                            BorderBrush="{DynamicResource SemiGrey5}"
+                            BorderBrush="#FFD8D8D8"
                             BorderThickness="1"
                             CornerRadius="10"
                             Margin="10 10 10 0"

@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using Raccoon.Tools.Dto;
 
 namespace Raccoon.Tools.ViewModels;
 

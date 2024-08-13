@@ -6,24 +6,24 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
 using Raccoon.Tools.Dto;
 using Raccoon.Tools.Services;
-using Raccoon.Tools.Views;
 
-namespace Raccoon.Tools.Pages;
+namespace Raccoon.Tools.Views;
 
-public partial class Login : UserControl
+public partial class Login : Window
 {
-    private WindowNotificationManager? _manager;
-
     public Login()
     {
         InitializeComponent();
     }
+    
+    public Action OnSuccess { get; set; }
+
+    private WindowNotificationManager? _manager;
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
-        var main = RaccoonContext.GetService<MainWindow>();
-        _manager = new WindowNotificationManager(main)
+        _manager = new WindowNotificationManager(this)
         {
             MaxItems = 3
         };
@@ -45,6 +45,7 @@ public partial class Login : UserControl
         {
             _manager?.Show(new Notification("成功", "Token已更新", NotificationType.Success));
             TokenService.SaveToken(result.Data.Token);   
+            OnSuccess?.Invoke();
         }
         else
         {
