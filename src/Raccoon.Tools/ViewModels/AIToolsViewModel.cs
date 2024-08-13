@@ -19,9 +19,8 @@ public class AIToolsViewModel : ViewModelBase
         [
             new AIToolsItemsViewModel
             {
-                Title = "Logo生成",
+                Title = "AI生成Logo",
                 Key = MenuKeys.MenuKeyCreateLogo,
-                Icon = "home"
             }
         ];
     }
