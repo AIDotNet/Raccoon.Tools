@@ -2,9 +2,104 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:Raccoon.Tools.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Raccoon.Tools.Pages.AIChat">
-    <Border Name="AIChatBorder">
-        
-    </Border>
+             x:Class="Raccoon.Tools.Pages.AIChat"
+             x:DataType="viewModels:AIChatViewModel">
+
+    <UserControl.DataContext>
+        <viewModels:AIChatViewModel />
+    </UserControl.DataContext>
+
+    <!-- 编写Border定义Classes -->
+    <UserControl.Styles>
+        <Style Selector="Border.border">
+            <Setter Property="BorderBrush" Value="#393b49" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
+    </UserControl.Styles>
+
+    <Grid RowDefinitions="*,Auto">
+        <ScrollViewer Name="AiChatScrollViewer" VerticalScrollBarVisibility="Auto" Grid.Row="0">
+            <ItemsControl ItemsSource="{Binding ChatLogs}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Grid Margin="5" ColumnDefinitions="*,Auto"
+                                  IsVisible="{Binding Role, Converter={StaticResource IsUserPanelConverter}}"
+                                  HorizontalAlignment="{Binding Role, Converter={StaticResource UserAlignmentConverter}}">
+                                <Border 
+                                        Background="{Binding Role, Converter={StaticResource UserBackgroundConverter}}"
+                                        HorizontalAlignment="{Binding Role, Converter={StaticResource UserAlignmentConverter}}"
+                                        Margin="5" Padding="10">
+                                    <TextBlock Text="{Binding Content}" TextWrapping="Wrap" />
+                                </Border>
+                                <Image Source="{Binding Extend,Converter={StaticResource UseAvatarConverter}}"
+                                       Width="40" Grid.Column="1"
+                                       RenderOptions.BitmapInterpolationMode="HighQuality"
+                                       Height="40" Margin="5" />
+                            </Grid>
+                            <Grid Margin="5" ColumnDefinitions="Auto,*"
+                                  IsVisible="{Binding Role, Converter={StaticResource IsAssistantPanelConverter}}"
+                                  HorizontalAlignment="{Binding Role, Converter={StaticResource UserAlignmentConverter}}">
+                                <Image Source="{Binding Extend,Converter={StaticResource UseAvatarConverter}}"
+                                       Width="40"
+                                       RenderOptions.BitmapInterpolationMode="HighQuality"
+                                       Height="40" Margin="5" />
+                                <Border Background="{Binding Role, Converter={StaticResource UserBackgroundConverter}}"
+                                        Grid.Column="1"
+                                        HorizontalAlignment="{Binding Role, Converter={StaticResource UserAlignmentConverter}}"
+                                        Margin="5" Padding="10">
+                                    <TextBlock Text="{Binding Content}" TextWrapping="Wrap" />
+                                </Border>
+                            </Grid>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <Border
+            Classes="border"
+            Grid.Row="1">
+            <StackPanel>
+                <StackPanel.Styles>
+                    <Style Selector="StackPanel">
+                    </Style>
+                </StackPanel.Styles>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="100">
+                    <TextBox Name="Input" AcceptsReturn="True" TextWrapping="Wrap">
+                        <TextBox.Styles>
+                            <Style Selector="TextBox">
+                                <Setter Property="BorderBrush" Value="Transparent" />
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="BorderThickness" Value="0" />
+                                <Setter Property="Margin" Value="5"></Setter>
+                                <Setter Property="Padding" Value="3"></Setter>
+                                <Setter Property="Watermark" Value="请输入您的问题！"></Setter>
+                            </Style>
+                            <Style Selector="TextBox:focus">
+                                <Setter Property="BorderBrush" Value="Transparent" />
+                                <Setter Property="Background" Value="Transparent" />
+                            </Style>
+                        </TextBox.Styles>
+                    </TextBox>
+                </ScrollViewer>
+                <Border Height="30" Background="#393b49">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Button Click="ChatSend_Click" Grid.Column="1" Foreground="White" Background="Transparent"
+                                Margin="3">
+                            <PathIcon Data="{StaticResource send_regular}" />
+                        </Button>
+                    </Grid>
+                    <Border.Styles>
+                        <Style Selector="Border">
+                            <Setter Property="CornerRadius" Value="0,0,5,5" />
+                        </Style>
+                    </Border.Styles>
+                </Border>
+            </StackPanel>
+        </Border>
+    </Grid>
 </UserControl>

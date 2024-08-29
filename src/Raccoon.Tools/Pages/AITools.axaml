@@ -34,7 +34,7 @@
                 <ItemsControl.DataTemplates>
                     <DataTemplate DataType="viewModels:AIToolsItemsViewModel">
                         <Border
-                            BorderBrush="#FFD8D8D8"
+                            Background="#2D2D2D"
                             BorderThickness="1"
                             CornerRadius="10"
                             Margin="10 10 10 0"
@@ -45,9 +45,15 @@
                                 Background="Transparent"
                                 PointerReleased="InputElement_OnPointerReleased"
                                 Tag="{Binding ActivateCommand}"
-                                Width="120" Height="38" Margin="0,8,0,0">
-                                <TextBlock FontSize="20"
+                                Width="120" Height="50" Margin="0,3,0,0">
+                                <TextBlock FontSize="14"
+                                           Margin="5 0 0 0"
                                            Text="{Binding Title}">
+                                </TextBlock>
+                                <TextBlock FontSize="10"
+                                           Text="{Binding Description}"
+                                           TextWrapping="WrapWithOverflow"
+                                           Margin="5 0 0 0">
                                 </TextBlock>
                             </WrapPanel>
                         </Border>

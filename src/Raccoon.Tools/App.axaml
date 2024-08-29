@@ -13,6 +13,11 @@
 
     <Application.Resources>
         <converters:IconNameToPathConverter x:Key="IconConverter" />
+        <converters:UserBackgroundConverter x:Key="UserBackgroundConverter" />
+        <converters:UserAlignmentConverter x:Key="UserAlignmentConverter" />
+        <converters:UseAvatarConverter x:Key="UseAvatarConverter" />
+        <converters:IsUserPanelConverter x:Key="IsUserPanelConverter" />
+        <converters:IsAssistantPanelConverter x:Key="IsAssistantPanelConverter" />
     </Application.Resources>
 
     <Application.Styles>

@@ -10,6 +10,11 @@ public class AIToolsItemsViewModel
 
     public string Key { get; set; }
 
+    /// <summary>
+    /// 描述
+    /// </summary>
+    public string Description { get; set; }
+    
     public string Icon { get; set; }
 
     public object ViewModel { get; set; }

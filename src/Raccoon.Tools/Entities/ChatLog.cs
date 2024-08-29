@@ -13,4 +13,6 @@ public class ChatLog : Entity<long>
     public string ParentId { get; set; }
     
     public Dictionary<string,string> Extend { get; set; }
+    
+    
 }

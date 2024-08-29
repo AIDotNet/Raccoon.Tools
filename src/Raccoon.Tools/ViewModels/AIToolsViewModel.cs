@@ -19,7 +19,8 @@ public class AIToolsViewModel : ViewModelBase
         [
             new AIToolsItemsViewModel
             {
-                Title = "AI生成Logo",
+                Title = "Logo生成",
+                Description = "利用AI画图生成指定风格的Logo",
                 Key = MenuKeys.MenuKeyCreateLogo,
             }
         ];

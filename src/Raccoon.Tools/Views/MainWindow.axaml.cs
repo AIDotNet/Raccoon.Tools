@@ -1,7 +1,4 @@
 using Avalonia.Controls;
-using Avalonia.Media;
-using Avalonia.Platform;
-using CommunityToolkit.Mvvm.Messaging;
 using FluentAvalonia.UI.Controls;
 using Raccoon.Tools.ViewModels;
 
@@ -13,11 +10,6 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         AdjustWindowSize();
-    }
-
-    public override void Render(DrawingContext context)
-    {
-        base.Render(context);
     }
 
     /// <summary>
@@ -38,19 +30,19 @@ public partial class MainWindow : Window
         {
             // 根据屏幕大小设置指定的窗口大小
             case <= 1920 when height <= 1080:
-                Width = 800;
+                Width = 850;
                 Height = 580;
                 break;
             case <= 2560 when height <= 1440:
-                Width = 1180;
+                Width = 1280;
                 Height = 720;
                 break;
             case <= 3840 when height <= 2160:
-                Width = 1300;
+                Width = 1350;
                 Height = 900;
                 break;
             default:
-                Width = 1520;
+                Width = 1580;
                 Height = 1080;
                 break;
         }
