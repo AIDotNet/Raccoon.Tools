@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using Avalonia.Controls;
 using FluentAvalonia.UI.Controls;
 using Raccoon.Tools.ViewModels;
@@ -56,5 +57,11 @@ public partial class MainWindow : Window
         {
             ViewModel.OnNavigation(ViewModel, item.Tag.ToString());
         }
+    }
+
+    protected override void OnClosing(WindowClosingEventArgs e)
+    {
+        e.Cancel = true; // 阻止窗口关闭
+        Hide(); // 隐藏窗口
     }
 }

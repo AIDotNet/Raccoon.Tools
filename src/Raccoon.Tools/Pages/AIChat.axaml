@@ -100,7 +100,9 @@
                     </Style>
                 </StackPanel.Styles>
                 <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="100">
-                    <TextBox Name="Input" AcceptsReturn="True" TextWrapping="Wrap">
+                    <TextBox 
+                        KeyDown="ChatInput_KeyDown"
+                        Name="Input" AcceptsReturn="True" TextWrapping="Wrap">
                         <TextBox.Styles>
                             <Style Selector="TextBox">
                                 <Setter Property="BorderBrush" Value="Transparent" />

@@ -1,5 +1,6 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Threading;
 using Microsoft.SemanticKernel.ChatCompletion;
@@ -69,6 +70,14 @@ public partial class AIChat : UserControl
         {
             Console.WriteLine(exception);
             throw;
+        }
+    }
+
+    private void ChatInput_KeyDown(object? sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.Enter && !e.KeyModifiers.HasFlag(KeyModifiers.Shift))
+        {
+            ChatSend_Click(sender, e);
         }
     }
 }

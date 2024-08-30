@@ -1,4 +1,5 @@
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
@@ -16,10 +17,13 @@ namespace Raccoon.Tools;
 
 public partial class App : Application
 {
+    
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
+        
     }
+    
 
     public override void OnFrameworkInitializationCompleted()
     {
@@ -85,5 +89,18 @@ public partial class App : Application
         }
 
         base.OnFrameworkInitializationCompleted();
+    }
+
+    private void Exit_Click(object? sender, EventArgs e)
+    {
+        Environment.Exit(0);
+    }
+
+    private void Open_Click(object? sender, EventArgs e)
+    {
+        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            desktop.MainWindow?.Show();
+        }
     }
 }

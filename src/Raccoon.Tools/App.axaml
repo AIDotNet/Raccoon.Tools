@@ -24,4 +24,19 @@
         <sty:FluentAvaloniaTheme PreferSystemTheme="True" PreferUserAccentColor="True" />
         <StyleInclude Source="avares://Raccoon.Tools/Icons.axaml" />
     </Application.Styles>
+    <TrayIcon.Icons>
+        <TrayIcons>
+            <TrayIcon Icon="/Assets/logo.ico" 
+                      ToolTipText="浣熊工具箱">
+                <TrayIcon.Menu>
+                    <NativeMenu>
+                        <NativeMenuItem Header="打开界面" Click="Open_Click">
+                        </NativeMenuItem>
+                        <NativeMenuItem Header="退出程序" Click="Exit_Click">
+                        </NativeMenuItem>
+                    </NativeMenu>
+                </TrayIcon.Menu>
+            </TrayIcon>
+        </TrayIcons>
+    </TrayIcon.Icons>
 </Application>
