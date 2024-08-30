@@ -6,6 +6,7 @@
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
         <ApplicationManifest>app.manifest</ApplicationManifest>
         <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+        <ApplicationIcon>Assets\logo.ico</ApplicationIcon>
     </PropertyGroup>
 
     <ItemGroup>
@@ -13,14 +14,19 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.1.3" />
-        <PackageReference Include="Avalonia.Desktop" Version="11.1.3" />
-        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.1.3" />
-        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.1.3" />
+      <Content Include="Assets\logo.ico" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="11.2.0-beta1" />
+        <PackageReference Include="Avalonia.Desktop" Version="11.2.0-beta1" />
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.0-beta1" />
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.0-beta1" />
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.1.3" />
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.2.0-beta1" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.0" />
         <PackageReference Include="FluentAvaloniaUI" Version="2.1.0" />
+        <PackageReference Include="LiteDB" Version="5.0.21" />
         <PackageReference Include="Mapster.DependencyInjection" Version="1.0.1" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7">
@@ -49,6 +55,10 @@
       <None Update="images\avatar.jpg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Functions\" />
     </ItemGroup>
 
 </Project>

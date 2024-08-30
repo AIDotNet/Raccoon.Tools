@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using LiteDB;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Raccoon.Tools;
 
@@ -27,6 +28,10 @@ public class RaccoonContext
         return _serviceProvider.GetRequiredService<T>();
     }
 
+    public static AsyncServiceScope CreateAsyncScope()
+    {
+        return _serviceProvider.CreateAsyncScope();
+    }
 
     public static T GetService<T>(Type type)
     {
@@ -51,5 +56,9 @@ public class RaccoonContext
 
         return httpClientFactory.CreateClient(name);
     }
-    
+
+    public static ILiteDatabase LiteDatabase()
+    {
+        return _serviceProvider.GetRequiredService<ILiteDatabase>();
+    }
 }

@@ -1,29 +1,32 @@
+using System.Text.Json;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using Avalonia.Platform;
+using LiteDB;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Raccoon.Tools.DataAccess;
+using Raccoon.Tools.Dto;
 using Raccoon.Tools.Services;
 using Raccoon.Tools.ViewModels;
 using Raccoon.Tools.Views;
 using Serilog;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Raccoon.Tools;
 
 public partial class App : Application
 {
-    
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
-        
     }
-    
+
 
     public override void OnFrameworkInitializationCompleted()
     {
@@ -39,6 +42,8 @@ public partial class App : Application
             DataContext = new LoginViewModel()
         });
 
+        builder.Service.AddSingleton<ILiteDatabase>((provider => new LiteDatabase("raccoon-file.db")));
+
         builder.Service.AddHttpClient();
 
         builder.Service.AddDbContext<RaccoonDbContext>(options =>
@@ -47,6 +52,20 @@ public partial class App : Application
                 .EnableSensitiveDataLogging()
                 .EnableDetailedErrors()
                 .LogTo(Log.Logger.Information);
+        });
+        builder.Service.AddSingleton<ModelsDto>(option =>
+        {
+            // 获取avaloniaResource内的资源
+            using var json = AssetLoader.Open(new Uri("avares://Raccoon.Tools/Assets/models.json"));
+            var reader = new StreamReader(json);
+            var jsonStr = reader.ReadToEnd();
+            var models = JsonSerializer.Deserialize<ModelsDto>(jsonStr, new JsonSerializerOptions()
+            {
+                PropertyNameCaseInsensitive = true,
+                ReadCommentHandling = JsonCommentHandling.Skip,
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            });
+            return models;
         });
 
         builder.Service.AddMapster();
@@ -74,7 +93,7 @@ public partial class App : Application
                 {
                     desktop.MainWindow = serviceProvider.GetRequiredService<MainWindow>();
                     desktop.MainWindow.Show();
-                    
+
                     // 隐藏
                     login.Hide();
                     login.Close();

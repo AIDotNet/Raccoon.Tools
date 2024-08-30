@@ -1,0 +1,49 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:Raccoon.Tools.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Raccoon.Tools.Pages.Files"
+             x:DataType="viewModels:FilesViewModel">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <viewModels:FilesViewModel />
+    </Design.DataContext>
+
+
+    <Grid RowDefinitions="Auto,*" Margin="5">
+        <Grid ColumnDefinitions="*,Auto">
+            <TextBlock Text="AI 智能文件存储" FontSize="24" FontWeight="Bold" Margin="10 10 0 10" />
+            <Button Grid.Column="1" Click="Button_OnClick" Content="上传文件" Margin="10 10 10 10" />
+        </Grid>
+        <Grid Grid.Row="1">
+            <DataGrid ItemsSource="{Binding Files}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="文件名" MinWidth="80" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="文件长度" Binding="{Binding Size}" />
+                    <DataGridTextColumn Header="文件状态" Binding="{Binding StateText}" />
+                    <DataGridTextColumn Header="文件创建时间" Binding="{Binding CreateAt}" />
+                    <DataGridTemplateColumn Header="操作" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <WrapPanel>
+                                    <Button
+                                        IsVisible="{Binding State,Converter={StaticResource QuantizeConverter}}"
+                                        Tag="{Binding Id}" Click="Quantize_OnClick">
+                                        量化
+                                    </Button>
+                                    <Button Tag="{Binding Id}" Click="Delete_OnClick">
+                                        删除
+                                    </Button>
+                                </WrapPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</UserControl>

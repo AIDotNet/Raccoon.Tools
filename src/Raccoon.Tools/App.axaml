@@ -4,7 +4,7 @@
              xmlns:local="using:Raccoon.Tools"
              xmlns:sty="using:FluentAvalonia.Styling"
              xmlns:converters="clr-namespace:Raccoon.Tools.Converters"
-             RequestedThemeVariant="Default">
+             RequestedThemeVariant="Dark">
     <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
     <Application.DataTemplates>
@@ -18,6 +18,8 @@
         <converters:UseAvatarConverter x:Key="UseAvatarConverter" />
         <converters:IsUserPanelConverter x:Key="IsUserPanelConverter" />
         <converters:IsAssistantPanelConverter x:Key="IsAssistantPanelConverter" />
+        <converters:IconSourceConverter x:Key="IconSourceConverter" />
+        <converters:QuantizeConverter x:Key="QuantizeConverter" />
     </Application.Resources>
 
     <Application.Styles>

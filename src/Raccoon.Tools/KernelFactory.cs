@@ -10,21 +10,21 @@ public class KernelFactory
     private static readonly ConcurrentDictionary<string, Kernel> Kernels = new();
 
 
-    public static Kernel Create(string name = "default")
+    public static Kernel Create(string model, string embeddingModel = "text-embedding-ada-002", string name = "default")
     {
-        return Kernels.GetOrAdd(name, key =>
+        return Kernels.GetOrAdd(name + model + embeddingModel, key =>
         {
             var client = new HttpClient(new OpenAiHandler("https://api.token-ai.cn/"));
 
             var kernel = Kernel.CreateBuilder()
-                .AddOpenAIChatCompletion("gpt-4o-mini", "sk-", httpClient: client)
+                .AddOpenAIChatCompletion(model, "sk-", httpClient: client)
                 .AddOpenAITextToImage("sk-", modelId: "dall-e-3",
                     httpClient: client)
-                .AddOpenAITextEmbeddingGeneration("text-embedding-ada-002", "sk-",
+                .AddOpenAITextEmbeddingGeneration(embeddingModel, "sk-",
                     httpClient: client)
                 .Build();
 
-            var pluginsDirectory = Path.Combine(Directory.GetCurrentDirectory(), "plugins","Tools");
+            var pluginsDirectory = Path.Combine(Directory.GetCurrentDirectory(), "plugins", "Tools");
 
             kernel.ImportPluginFromPromptDirectory(pluginsDirectory, "Tools");
 

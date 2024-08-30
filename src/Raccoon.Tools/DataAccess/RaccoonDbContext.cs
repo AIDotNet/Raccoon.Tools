@@ -8,6 +8,8 @@ public class RaccoonDbContext(DbContextOptions<RaccoonDbContext> options) : DbCo
 {
     public DbSet<ChatLog> ChatLogs { get; set; }
 
+    public DbSet<FileStorage> Files { get; set; }
+
     public override int SaveChanges()
     {
         ModifiedEntity();
@@ -35,6 +37,13 @@ public class RaccoonDbContext(DbContextOptions<RaccoonDbContext> options) : DbCo
                     v => JsonSerializer.Serialize(v, new JsonSerializerOptions()),
                     v => JsonSerializer.Deserialize<Dictionary<string, string>>(v, new JsonSerializerOptions())
                 );
+        });
+
+        modelBuilder.Entity<FileStorage>(entity =>
+        {
+            entity.HasKey(x => x.Id);
+
+            entity.HasIndex(x => x.Name);
         });
     }
 

@@ -100,7 +100,7 @@
                     </Style>
                 </StackPanel.Styles>
                 <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="100">
-                    <TextBox 
+                    <TextBox
                         KeyDown="ChatInput_KeyDown"
                         Name="Input" AcceptsReturn="True" TextWrapping="Wrap">
                         <TextBox.Styles>
@@ -121,10 +121,52 @@
                 </ScrollViewer>
                 <Border Height="30" Background="#393b49">
                     <Grid ColumnDefinitions="*,Auto">
-                        <WrapPanel>
-                            <Button Background="Transparent"
+                        <WrapPanel Margin="5,3,0,0">
+                            <Button Name="Tools" Background="Transparent"
+                                    ToolTip.Placement="Top"
                                     Padding="3">
                                 <PathIcon Data="{StaticResource apps_regular}" />
+                                <ToolTip.Tip>
+                                    <ScrollViewer Height="300" VerticalScrollBarVisibility="Auto">
+                                        <StackPanel>
+                                            <TextBlock Text="选择模型" FontWeight="Bold" Margin="0,0,0,10" />
+                                            <ListBox SelectedItem="{Binding SelectedChatModels}"
+                                                     SelectionChanged="SelectingItemsControl_OnSelectionChanged"
+                                                     ItemsSource="{Binding ModelDto}">
+                                                <ListBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid ColumnDefinitions="*,Auto,Auto,Auto">
+                                                            <TextBlock
+                                                                HorizontalAlignment="Left"
+                                                                VerticalAlignment="Center"
+                                                                Text="{Binding DisplayName}"
+                                                                 />
+                                                            <Border Grid.Column="1" Background="#373737"
+                                                                    IsVisible="{Binding FunctionCall}"
+                                                                    CornerRadius="3" Margin="2"
+                                                                    Padding="3">
+                                                                <PathIcon Data="{StaticResource function_call}"></PathIcon>
+                                                            </Border>
+                                                            <Border Grid.Column="2" Background="#373737"
+                                                                    IsVisible="{Binding Vision}"
+                                                                    CornerRadius="3" Margin="2"
+                                                                    Padding="3">
+                                                                <PathIcon Data="{StaticResource image_copy_regular}"></PathIcon>
+                                                            </Border>
+                                                            <Border Grid.Column="3" Background="#373737"
+                                                                    CornerRadius="3" Margin="2"
+                                                                    Padding="3">
+                                                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                                           Text="{Binding TokenName}">
+                                                                </TextBlock>
+                                                            </Border>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </ListBox.ItemTemplate>
+                                            </ListBox>
+                                        </StackPanel>
+                                    </ScrollViewer>
+                                </ToolTip.Tip>
                             </Button>
                         </WrapPanel>
 

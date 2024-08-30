@@ -12,5 +12,7 @@ public static class MenuKeys
 
     public const string MenuKeyCreateLogo = "CreateLogo";
     
+    public const string Files = "Files";
+    
     public const string MenuKeySetting = "设置";
 }

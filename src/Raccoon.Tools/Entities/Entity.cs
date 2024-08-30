@@ -2,7 +2,7 @@
 
 public abstract class Entity<TKey> : ICreatable, IUpdatable
 {
-    public required TKey Id { get; set; }
+    public  TKey Id { get; set; }
 
     public DateTime UpdatedAt { get; set; }
 

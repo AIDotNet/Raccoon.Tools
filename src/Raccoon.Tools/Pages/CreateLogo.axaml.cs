@@ -56,7 +56,7 @@ public partial class CreateLogo : UserControl
 
             ViewModel?.CreateLogoItems.Add(value);
 
-            var kernel = KernelFactory.Create();
+            var kernel = KernelFactory.Create("gpt-4o-mini");
 
             var plugin = kernel.Plugins["Tools"];
 
