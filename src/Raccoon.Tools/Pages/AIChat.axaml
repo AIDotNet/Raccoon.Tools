@@ -30,31 +30,62 @@
                             <Grid Margin="5" ColumnDefinitions="*,Auto"
                                   IsVisible="{Binding Role, Converter={StaticResource IsUserPanelConverter}}"
                                   HorizontalAlignment="{Binding Role, Converter={StaticResource UserAlignmentConverter}}">
-                                <Border 
-                                        Background="{Binding Role, Converter={StaticResource UserBackgroundConverter}}"
-                                        HorizontalAlignment="{Binding Role, Converter={StaticResource UserAlignmentConverter}}"
-                                        Margin="5" Padding="10">
-                                    <TextBlock Text="{Binding Content}" TextWrapping="Wrap" />
+                                <Border
+                                    Background="{Binding Role, Converter={StaticResource UserBackgroundConverter}}"
+                                    HorizontalAlignment="{Binding Role, Converter={StaticResource UserAlignmentConverter}}"
+                                    Margin="5" Padding="10">
+                                    <TextBox Text="{Binding Content}"
+                                             TextWrapping="Wrap"
+                                             Background="Transparent"
+                                             IsReadOnly="True"
+                                             BorderThickness="0"
+                                             AcceptsReturn="False"
+                                             AcceptsTab="False"
+                                             IsHitTestVisible="True" />
                                 </Border>
-                                <Image Source="{Binding Extend,Converter={StaticResource UseAvatarConverter}}"
+                                <Image Source="{Binding Extend, Converter={StaticResource UseAvatarConverter}}"
                                        Width="40" Grid.Column="1"
+                                       VerticalAlignment="Top"
+                                       HorizontalAlignment="Right"
                                        RenderOptions.BitmapInterpolationMode="HighQuality"
-                                       Height="40" Margin="5" />
+                                       Height="40" Margin="5">
+                                    <Image.Clip>
+                                        <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20" />
+                                    </Image.Clip>
+                                </Image>
                             </Grid>
                             <Grid Margin="5" ColumnDefinitions="Auto,*"
                                   IsVisible="{Binding Role, Converter={StaticResource IsAssistantPanelConverter}}"
                                   HorizontalAlignment="{Binding Role, Converter={StaticResource UserAlignmentConverter}}">
-                                <Image Source="{Binding Extend,Converter={StaticResource UseAvatarConverter}}"
-                                       Width="40"
+                                <Image Source="{Binding Extend, Converter={StaticResource UseAvatarConverter}}"
+                                       Width="40" Grid.Column="0"
+                                       VerticalAlignment="Top"
+                                       HorizontalAlignment="Left"
                                        RenderOptions.BitmapInterpolationMode="HighQuality"
-                                       Height="40" Margin="5" />
+                                       Height="40" Margin="5">
+                                    <Image.Clip>
+                                        <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20" />
+                                    </Image.Clip>
+                                </Image>
                                 <Border Background="{Binding Role, Converter={StaticResource UserBackgroundConverter}}"
                                         Grid.Column="1"
                                         HorizontalAlignment="{Binding Role, Converter={StaticResource UserAlignmentConverter}}"
                                         Margin="5" Padding="10">
-                                    <TextBlock Text="{Binding Content}" TextWrapping="Wrap" />
+                                    <TextBox TextWrapping="Wrap"
+                                             Background="Transparent"
+                                             IsReadOnly="True"
+                                             BorderThickness="0"
+                                             AcceptsReturn="False"
+                                             AcceptsTab="False"
+                                             IsHitTestVisible="True"
+                                             Text="{Binding Content}" />
                                 </Border>
                             </Grid>
+                            <StackPanel.Styles>
+                                <Style Selector="TextBox">
+                                    <Setter Property="SelectionBrush" Value="Transparent" />
+                                </Style>
+                            </StackPanel.Styles>
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
@@ -88,8 +119,15 @@
                 </ScrollViewer>
                 <Border Height="30" Background="#393b49">
                     <Grid ColumnDefinitions="*,Auto">
-                        <Button Click="ChatSend_Click" Grid.Column="1" Foreground="White" Background="Transparent"
-                                Margin="3">
+                        <WrapPanel>
+                            <Button Background="Transparent"
+                                    Padding="3">
+                                <PathIcon Data="{StaticResource apps_regular}" />
+                            </Button>
+                        </WrapPanel>
+
+                        <Button Click="ChatSend_Click" Grid.Column="1" Background="Transparent"
+                                Padding="3">
                             <PathIcon Data="{StaticResource send_regular}" />
                         </Button>
                     </Grid>

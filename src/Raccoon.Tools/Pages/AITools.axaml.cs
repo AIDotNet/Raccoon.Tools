@@ -17,7 +17,5 @@ public partial class AITools : UserControl
         {
             command.Execute(null);
         }
-        
-        
     }
 }
