@@ -19,6 +19,38 @@ public partial class Files : UserControl
         InitializeComponent();
     }
 
+    protected override async void OnInitialized()
+    {
+        base.OnInitialized();
+
+        await LoadFiles();
+    }
+
+
+    public async Task LoadFiles()
+    {
+        await using var scope = RaccoonContext.CreateAsyncScope();
+        var dbContext = scope.ServiceProvider.GetService<RaccoonDbContext>();
+
+        var files = await dbContext.Files.ToListAsync();
+
+        ViewModel.Files.Clear();
+
+        foreach (var file in files)
+        {
+            ViewModel.Files.Add(new FilesDto()
+            {
+                CreateAt = file.CreateAt,
+                Name = file.Name,
+                Path = file.Path,
+                Size = file.Size,
+                State = file.State,
+                FileType = file.FileType,
+                Id = file.Id,
+            });
+        }
+    }
+
     private FilesViewModel ViewModel => (FilesViewModel)DataContext;
 
     private async void Button_OnClick(object? sender, RoutedEventArgs e)
@@ -77,17 +109,18 @@ public partial class Files : UserControl
 
     private async void Delete_OnClick(object? sender, RoutedEventArgs e)
     {
-        if (sender is Button button && button.Tag is long id)
-        {
-            await using var scope = RaccoonContext.CreateAsyncScope();
-            var dbContext = scope.ServiceProvider.GetService<RaccoonDbContext>();
+        if (sender is not Button { Tag: long id }) return;
+        
+        await using var scope = RaccoonContext.CreateAsyncScope();
+        var dbContext = scope.ServiceProvider.GetService<RaccoonDbContext>();
 
-            var fileEntity = RaccoonContext.LiteDatabase();
+        var fileEntity = RaccoonContext.LiteDatabase();
 
-            fileEntity.FileStorage.Delete(id.ToString());
+        fileEntity.FileStorage.Delete(id.ToString());
 
-            await dbContext.Files.Where(x => x.Id == id).ExecuteDeleteAsync();
-        }
+        await dbContext.Files.Where(x => x.Id == id).ExecuteDeleteAsync();
+            
+        await LoadFiles();
     }
 
     private async void Quantize_OnClick(object? sender, RoutedEventArgs e)

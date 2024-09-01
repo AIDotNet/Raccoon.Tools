@@ -39,6 +39,7 @@ public partial class MainWindowViewModel : ViewModelBase
             MenuKeys.Files => new FilesViewModel(),
             MenuKeys.MenuKeyCreateLogo => new CreateLogoViewModel(),
             MenuKeys.MenuKeySetting => new SettingViewModel(),
+            MenuKeys.Translate => new TranslateViewModel(),
             _ => throw new ArgumentOutOfRangeException(nameof(s), s, null)
         };
     }

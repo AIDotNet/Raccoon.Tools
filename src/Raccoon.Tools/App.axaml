@@ -20,6 +20,7 @@
         <converters:IsAssistantPanelConverter x:Key="IsAssistantPanelConverter" />
         <converters:IconSourceConverter x:Key="IconSourceConverter" />
         <converters:QuantizeConverter x:Key="QuantizeConverter" />
+        <converters:ByteConverter x:Key="ByteConverter" />
     </Application.Resources>
 
     <Application.Styles>

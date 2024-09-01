@@ -23,7 +23,7 @@
             <DataGrid ItemsSource="{Binding Files}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="文件名" MinWidth="80" Binding="{Binding Name}" />
-                    <DataGridTextColumn Header="文件长度" Binding="{Binding Size}" />
+                    <DataGridTextColumn Header="文件长度" Binding="{Binding Size,Converter={StaticResource ByteConverter}}" />
                     <DataGridTextColumn Header="文件状态" Binding="{Binding StateText}" />
                     <DataGridTextColumn Header="文件创建时间" Binding="{Binding CreateAt}" />
                     <DataGridTemplateColumn Header="操作" Width="*">
@@ -31,11 +31,13 @@
                             <DataTemplate>
                                 <WrapPanel>
                                     <Button
+                                        Margin="5"
                                         IsVisible="{Binding State,Converter={StaticResource QuantizeConverter}}"
                                         Tag="{Binding Id}" Click="Quantize_OnClick">
                                         量化
                                     </Button>
-                                    <Button Tag="{Binding Id}" Click="Delete_OnClick">
+                                    <Button
+                                        Margin="5" Tag="{Binding Id}" Click="Delete_OnClick">
                                         删除
                                     </Button>
                                 </WrapPanel>

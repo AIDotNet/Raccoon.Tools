@@ -28,6 +28,7 @@
             <controls:NavigationView.MenuItems>
                 <controls:NavigationViewItem Content="首页" Tag="Home" IconSource="Home" />
                 <controls:NavigationViewItem Content="AI工具" Tag="AI" IconSource="Library" />
+                <controls:NavigationViewItem Content="翻译" Tag="Translate" IconSource="Shop" />
                 <controls:NavigationViewItem Content="AI Chat" Tag="AIChat" IconSource="Message" />
                 <controls:NavigationViewItem Content="AI Files" Tag="Files" IconSource="Upload">
                 </controls:NavigationViewItem>
