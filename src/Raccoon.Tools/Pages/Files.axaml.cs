@@ -110,7 +110,7 @@ public partial class Files : UserControl
     private async void Delete_OnClick(object? sender, RoutedEventArgs e)
     {
         if (sender is not Button { Tag: long id }) return;
-        
+
         await using var scope = RaccoonContext.CreateAsyncScope();
         var dbContext = scope.ServiceProvider.GetService<RaccoonDbContext>();
 
@@ -119,7 +119,7 @@ public partial class Files : UserControl
         fileEntity.FileStorage.Delete(id.ToString());
 
         await dbContext.Files.Where(x => x.Id == id).ExecuteDeleteAsync();
-            
+
         await LoadFiles();
     }
 
@@ -127,6 +127,9 @@ public partial class Files : UserControl
     {
         if (sender is Button { Tag: long id })
         {
+            var kernel = KernelFactory.Create("gpt-4o-mini");
+            
+            
             await using var scope = RaccoonContext.CreateAsyncScope();
             var dbContext = scope.ServiceProvider.GetService<RaccoonDbContext>();
 
