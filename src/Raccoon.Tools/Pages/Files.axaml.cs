@@ -1,4 +1,5 @@
-﻿using Avalonia;
+﻿using System.Text;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
@@ -87,9 +88,8 @@ public partial class Files : UserControl
                     FileType = "file",
                 });
 
-                await using var stream = fileInfo.OpenRead();
 
-                fileEntity.FileStorage.Upload(entity.Entity.Id.ToString(), entity.Entity.Id + fileInfo.Name, stream);
+                fileEntity.FileStorage.Upload(entity.Entity.Id.ToString(), fileInfo.FullName);
 
                 ViewModel.Files.Add(new FilesDto()
                 {
@@ -127,14 +127,30 @@ public partial class Files : UserControl
     {
         if (sender is Button { Tag: long id })
         {
-            var kernel = KernelFactory.Create("gpt-4o-mini");
-            
-            
+            var memroyServiceless = KernelFactory.CreateMemoryServerless();
+
+
+            var fileEntity = RaccoonContext.LiteDatabase();
+
+            using var memoryStream = new MemoryStream();
+
+            var str = fileEntity.FileStorage.Download(id.ToString(), id.ToString(), true);
+
+            var stream = str.OpenRead();
+
+            await stream.CopyToAsync(memoryStream);
+
+            var jsonStr = Encoding.UTF8.GetString(memoryStream.ToArray());
+
+            await memroyServiceless.ImportTextAsync(jsonStr);
+
             await using var scope = RaccoonContext.CreateAsyncScope();
             var dbContext = scope.ServiceProvider.GetService<RaccoonDbContext>();
 
             await dbContext.Files.Where(x => x.Id == id)
                 .ExecuteUpdateAsync(x => x.SetProperty(i => i.State, FileState.Success));
+
+            await dbContext.SaveChangesAsync();
         }
     }
 }
